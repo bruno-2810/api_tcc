@@ -1,11 +1,13 @@
+import { autenticar } from '../utils/jwt.js'
 import * as bd from '../repository/orcamentoRepository.js'
 import { Router } from 'express'
 
 const endpoints = Router()
 
-endpoints.post('/orcamento', async (req, resp) => {
+endpoints.post('/orcamento', autenticar, async (req, resp) => {
     try {
         let orcamento = req.body
+        orcamento.id = req.user.id
         let id = await bd.inserirOrcamento(orcamento)
         resp.send({
             novoId: id
@@ -18,9 +20,10 @@ endpoints.post('/orcamento', async (req, resp) => {
     }
 })
 
-endpoints.get('/orcamentos', async (req, resp) => {
+endpoints.get('/orcamentos', autenticar, async (req, resp) => {
     try {
-        let resposta = await bd.consultarOrcamentos()
+        const id = req.user.id
+        let resposta = await bd.consultarOrcamentos(id)
         resp.send(resposta)
     } catch (err) {
         resp.status(400).send({
@@ -29,7 +32,7 @@ endpoints.get('/orcamentos', async (req, resp) => {
     }
 })
 
-endpoints.put('/orcamento/:id', async (req, resp) => {
+endpoints.put('/orcamento/:id', autenticar, async (req, resp) => {
     try {
 
         let orcamento = req.body
@@ -52,7 +55,7 @@ endpoints.put('/orcamento/:id', async (req, resp) => {
     }
 })
 
-endpoints.delete('/orcamento/:id', async (req, resp) => {
+endpoints.delete('/orcamento/:id', autenticar, async (req, resp) => {
     try {
         let id = req.params.id
         let resposta = await bd.removerOrcamento(id)

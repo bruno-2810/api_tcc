@@ -2,16 +2,16 @@ import con from "./connection.js";
 
 export async function inserirCliente (cliente) {
     let comando = `
-    insert into tb_clientes (nm_cliente, ds_telefone, ds_email, ds_endereco, dt_insercao)
-	values (?, ?, ?, ?, ?);
+    insert into tb_clientes (nm_cliente, id_usuario, ds_telefone, ds_email, ds_endereco, dt_insercao)
+	values (?, ?, ?, ?, ?, ?);
     `
-    let resposta = await con.query (comando, [cliente.nome, cliente.telefone, cliente.email, cliente.endereco, cliente.insercao])
+    let resposta = await con.query (comando, [cliente.nome, cliente.idUsuario, cliente.telefone, cliente.email, cliente.endereco, cliente.insercao])
     let info = resposta[0]
 
     return info.insertId
 }
 
-export async function consultarClientes () {
+export async function consultarClientes (idUsuario) {
     let comando = `
     select id_cliente   id,
         nm_cliente  nome,
@@ -20,8 +20,9 @@ export async function consultarClientes () {
         ds_endereco endereco,
         dt_insercao insercao
     from tb_clientes
+    where id_usuario = ?
     `
-    let resposta = await con.query(comando)
+    let resposta = await con.query(comando, [idUsuario])
     let info = resposta[0]
 
     return info

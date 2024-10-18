@@ -1,3 +1,4 @@
+import { gerarToken } from '../utils/jwt.js'
 import * as bd from '../repository/loginRepository.js'
 import { Router } from 'express'
 
@@ -5,8 +6,8 @@ const endpoints = Router()
 
 endpoints.post('/cadastrar', async (req, resp) => {
     try {
-        let cadastro = req.body
-        let id = await bd.cadastrar(cadastro)
+        let usuario = req.body
+        let id = await bd.cadastrar(usuario)
         resp.send({
             novoId: id
         })
@@ -32,17 +33,18 @@ endpoints.get('/cadastros', async (req, resp) => {
 
 endpoints.post('/login', async (req, resp) => {
     try {
-        let cadastro = req.body
-        let resposta = await bd.verificarLogin(cadastro)
+        let usuario = req.body
+        let resposta = await bd.verificarLogin(usuario)
 
-        if(resposta){
+        if (resposta) {
+            let token = gerarToken(resposta)
             resp.send({
-                mensagem: "login bem-sucedido"
+                "token": token
             })
         }
-        else{
+        else {
             resp.send({
-                mensagem: "email ou senha incorretos"
+                "mensagem": "email ou senha incorreto"
             })
         }
     }
@@ -52,5 +54,29 @@ endpoints.post('/login', async (req, resp) => {
         })
     }
 })
+
+endpoints.delete('/cadastro/:id', async (req, resp) => {
+    try {
+        let id = req.params.id
+        let resposta = await bd.deletarUsuario(id)
+        if(resposta >= 1){
+            resp.send({
+                mensagem: "usuario deletado"
+            })
+        }
+        else{
+            resp.send({
+                mensagem: "usuario não encontrado"
+            })
+        }
+    } 
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })    
+    }
+})
+
+
 
 export default endpoints;
