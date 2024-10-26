@@ -29,3 +29,20 @@ id_usuario int primary key auto_increment,
 ds_email varchar(100),
 ds_senha varchar(100)
 );
+
+
+
+PORTA=5100
+
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PWD=1234
+MYSQL_DB=tcc
+
+
+PORTA=5100
+
+MYSQL_HOST=192.168.0.25
+MYSQL_USER=infobmaster
+MYSQL_PWD=Aluno2024!
+MYSQL_DB=tcc_techprocess

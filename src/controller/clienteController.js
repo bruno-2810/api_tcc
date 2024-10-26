@@ -32,6 +32,19 @@ endpoints.get('/clientes', autenticar, async (req, resp) => {
     }
 })
 
+endpoints.get('/cliente/:id', autenticar, async (req, resp) =>{
+    
+    let id = req.params
+    try {
+        let cliente = await bd.consultarClientePorId(id)
+        resp.send(cliente)
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
 endpoints.put('/cliente/:id', autenticar, async (req, resp) => {
     try {
 
