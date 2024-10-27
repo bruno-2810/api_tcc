@@ -11,23 +11,33 @@ export async function inserirCliente(cliente) {
     return info.insertId
 }
 
-export async function consultarClientes(idUsuario) {
+export async function consultarClientes(idUsuario, filtro) {
     let comando = `
     select id_cliente   id,
-        nm_cliente  nome,
-        id_usuario  idUsuario,
-        ds_telefone telefone,
-        ds_email    email,
-        ds_endereco endereco,
-        dt_insercao insercao
+           nm_cliente   nome,
+           id_usuario   idUsuario,
+           ds_telefone  telefone,
+           ds_email     email,
+           ds_endereco  endereco,
+           dt_insercao  insercao
     from tb_clientes
     where id_usuario = ?
-    `
-    let resposta = await con.query(comando, [idUsuario])
-    let info = resposta[0]
+    `;
 
-    return info
+    if (filtro === 'a-z') {
+        comando += ` order by nm_cliente asc`;
+    } else if (filtro === 'z-a') {
+        comando += ` order by nm_cliente desc`;
+    } else if (filtro === 'recentes') {
+        comando += ` order by dt_insercao desc`;
+    } else if (filtro === 'antigos') {
+        comando += ` order by dt_insercao asc`;
+    }
+
+    let resposta = await con.query(comando, [idUsuario]);
+    return resposta[0];
 }
+
 
 export async function consultarClientePorId(id) {
     let comando = `

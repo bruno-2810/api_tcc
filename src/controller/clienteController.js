@@ -22,15 +22,17 @@ endpoints.post('/cliente', autenticar, async (req, resp) => {
 
 endpoints.get('/clientes', autenticar, async (req, resp) => {
     try {
-        const idUsuario = req.user.id
-        let resposta = await bd.consultarClientes(idUsuario)
-        resp.send(resposta)
+        const idUsuario = req.user.id;
+        const filtro = req.query.filtro; 
+        let resposta = await bd.consultarClientes(idUsuario, filtro);
+        resp.send(resposta);
     } catch (err) {
         resp.status(400).send({
             erro: err.message
-        })
+        });
     }
-})
+});
+
 
 endpoints.get('/cliente/:id', autenticar, async (req, resp) =>{
     
