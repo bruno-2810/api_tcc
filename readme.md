@@ -32,7 +32,7 @@ ds_senha varchar(100)
 );
 
 insert into tb_usuarios (ds_email, ds_senha)
-value ("brunin", "1234");
+value ("braga", "hojentemhoradeirembora");
 
 PORTA=5100
 
