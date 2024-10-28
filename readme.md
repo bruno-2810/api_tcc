@@ -31,7 +31,8 @@ ds_email varchar(100),
 ds_senha varchar(100)
 );
 
-
+insert into tb_usuarios (ds_email, ds_senha)
+value ("brunin", "1234");
 
 PORTA=5100
 
@@ -46,4 +47,4 @@ PORTA=5100
 MYSQL_HOST=192.168.0.25
 MYSQL_USER=infobmaster
 MYSQL_PWD=Aluno2024!
-MYSQL_DB=tcc_techprocess
+MYSQL_DB=mblvidros

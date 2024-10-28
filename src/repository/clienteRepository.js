@@ -55,7 +55,7 @@ export async function consultarClientePorId(id) {
     `;
     
     let resposta = await con.query(comando, [id]);
-    let info = resposta[0];
+    let info = resposta[0][0];
 
     if (info.foto != null) {
         info.foto = info.foto.toString();
