@@ -23,8 +23,22 @@ endpoints.post('/orcamento', autenticar, async (req, resp) => {
 endpoints.get('/orcamentos', autenticar, async (req, resp) => {
     try {
         const id = req.user.id
-        let resposta = await bd.consultarOrcamentos(id)
+        const filtro = req.query.filtro
+        let resposta = await bd.consultarOrcamentos(id, filtro)
         resp.send(resposta)
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+endpoints.get('/orcamento/:id', autenticar, async (req, resp) => {
+    let id = req.params.id
+
+try {
+        let servico = await bd.buscarOrcamentoPorId(id)
+        resp.send(servico)
     } catch (err) {
         resp.status(400).send({
             erro: err.message
