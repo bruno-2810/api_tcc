@@ -2,10 +2,10 @@ import con from "./connection.js";
 
 export async function inserirCliente(cliente) {
     let comando = `
-    insert into tb_clientes (nm_cliente, id_usuario, ds_telefone, ds_email, ds_endereco, dt_insercao)
-	values (?, ?, ?, ?, ?, ?);
+    insert into tb_clientes (nm_cliente, id_usuario, ds_telefone, ds_email, ds_endereco, dt_insercao, ft_cliente)
+values (?, ?, ?, ?, ?, ?, ?);
     `
-    let resposta = await con.query(comando, [cliente.nome, cliente.id, cliente.telefone, cliente.email, cliente.endereco, cliente.insercao])
+    let resposta = await con.query(comando, [cliente.nome, cliente.id, cliente.telefone, cliente.email, cliente.endereco, cliente.insercao, cliente.foto])
     let info = resposta[0]
 
     return info.insertId
@@ -48,14 +48,22 @@ export async function consultarClientePorId(id) {
         ds_telefone as telefone,
         ds_email as email,
         ds_endereco as endereco,
-        dt_insercao as insercao
+        dt_insercao as insercao,
+        ft_cliente as foto
     from tb_clientes
     where id_cliente = ?;
-    `
+    `;
+    
     let resposta = await con.query(comando, [id]);
     let info = resposta[0];
-    return info
+
+    if (info.foto != null) {
+        info.foto = info.foto.toString();
+    }
+
+    return info;
 }
+
 
 export async function alterarCliente(id, cliente) {
     let comando = `
@@ -64,10 +72,11 @@ export async function alterarCliente(id, cliente) {
             ds_telefone = ?,
             ds_email = ?,
             ds_endereco = ?,
-            dt_insercao = ?
+            dt_insercao = ?,
+            ft_cliente = ?
         where id_cliente = ?;
     `
-    let resposta = await con.query(comando, [cliente.nome, cliente.telefone, cliente.email, cliente.endereco, cliente.insercao, id])
+    let resposta = await con.query(comando, [cliente.nome, cliente.telefone, cliente.email, cliente.endereco, cliente.insercao, cliente.foto, id])
     let info = resposta[0]
 
     return info.affectedRows
@@ -82,4 +91,4 @@ export async function removerCliente(id) {
     let info = resposta[0]
 
     return info.affectedRows
-} 
+}

@@ -9,6 +9,7 @@ ds_telefone varchar (11),
 ds_email varchar(200),
 ds_endereco varchar (200),
 dt_insercao date,
+ft_cliente longblob,
 	foreign key (id_usuario) references tb_usuarios(id_usuario)
 );
 

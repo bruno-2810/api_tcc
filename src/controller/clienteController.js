@@ -36,7 +36,7 @@ endpoints.get('/clientes', autenticar, async (req, resp) => {
 
 endpoints.get('/cliente/:id', autenticar, async (req, resp) =>{
     
-    let id = req.params
+    let id = req.params.id
     try {
         let cliente = await bd.consultarClientePorId(id)
         resp.send(cliente)
