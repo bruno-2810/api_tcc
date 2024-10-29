@@ -20,6 +20,7 @@ id_usuario int,
 nm_orcamento varchar(100),
 ds_orcamento varchar (200),
 dt_realizacao date,
+bt_finalizado boolean,
 vl_valor decimal (10,2),
     foreign key (id_cliente) references tb_clientes(id_cliente),
 	foreign key (id_usuario) references tb_usuarios(id_usuario)
@@ -32,7 +33,7 @@ ds_senha varchar(100)
 );
 
 insert into tb_usuarios (ds_email, ds_senha)
-value ("braga", "hojentemhoradeirembora");
+value ("brunin", "1234");
 
 PORTA=5100
 

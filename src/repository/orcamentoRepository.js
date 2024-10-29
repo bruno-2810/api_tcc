@@ -16,6 +16,7 @@ export async function consultarOrcamentos(id, filtro) {
 SELECT 
     o.id_orcamento  idOrcamento,
     o.nm_orcamento  titulo,
+    c.id_cliente    idCliente,
     c.nm_cliente    cliente,
     o.ds_orcamento  descricao,
     o.dt_realizacao realizacao,
