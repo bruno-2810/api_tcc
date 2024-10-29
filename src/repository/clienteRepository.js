@@ -22,7 +22,7 @@ export async function consultarClientes(idUsuario, filtro) {
            dt_insercao  insercao
     from tb_clientes
     where id_usuario = ?
-    `;
+    `
 
     if (filtro === 'a-z') {
         comando += ` order by nm_cliente asc`;

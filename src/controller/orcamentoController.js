@@ -25,7 +25,7 @@ endpoints.get('/orcamentos', autenticar, async (req, resp) => {
         const id = req.user.id
         const filtro = req.query.filtro
         let resposta = await bd.consultarOrcamentos(id, filtro)
-        resp.send(resposta)
+        resp.send(resposta);
     } catch (err) {
         resp.status(400).send({
             erro: err.message
