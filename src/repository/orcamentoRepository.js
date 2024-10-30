@@ -47,15 +47,22 @@ WHERE
 
 export async function buscarOrcamentoPorId(id) {
     let comando = `
-    select  id_orcamento idOrcamento,
-            id_cliente  idCliente,
-            id_usuario  idUsuario,
-            nm_orcamento    titulo,
-            ds_orcamento    descricao,
-            dt_realizacao   realizacao,
-            vl_valor    valor
-    from tb_orcamentos
-    where id_orcamento = ?
+    SELECT 
+    o.id_orcamento  idOrcamento,
+    o.nm_orcamento  titulo,
+    c.id_cliente    idCliente,
+    c.nm_cliente    cliente,
+    o.ds_orcamento  descricao,
+    o.dt_realizacao realizacao,
+    o.bt_finalizado finalizado,
+    o.vl_valor  valor,
+    c.nm_cliente    cliente
+FROM 
+    tb_orcamentos o
+JOIN 
+    tb_clientes c ON o.id_cliente = c.id_cliente
+WHERE 
+    o.id_orcamento = ?;
     `
     let resposta = await con.query(comando, [id]);
     let info = resposta[0][0];
@@ -70,10 +77,11 @@ export async function alterarOrcamento(id, orcamento) {
             nm_orcamento = ?,
             ds_orcamento = ?,
             dt_realizacao = ?,
+            bt_finalizado = ?,
             vl_valor = ?
         where id_orcamento = ?
     `
-    let resposta = await con.query(comando, [orcamento.cliente, orcamento.idUsuario, orcamento.titulo, orcamento.descricao, orcamento.realizacao, orcamento.valor, id])
+    let resposta = await con.query(comando, [orcamento.cliente, orcamento.idUsuario, orcamento.titulo, orcamento.descricao, orcamento.realizacao, orcamento.finalizado, orcamento.valor, id])
     let info = resposta[0]
 
     return info.affectedRows

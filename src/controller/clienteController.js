@@ -91,4 +91,17 @@ endpoints.delete('/cliente/:id', autenticar, async (req, resp) => {
     }
 })
 
+endpoints.get('/clientes/nome', autenticar, async (req, resp) => {
+    const nome = req.query.nome; 
+    try {
+        const clientes = await bd.buscarClientesPorNome(nome); 
+        resp.send(clientes);
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        });
+    }
+});
+
+
 export default endpoints;

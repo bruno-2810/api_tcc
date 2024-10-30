@@ -92,3 +92,17 @@ export async function removerCliente(id) {
 
     return info.affectedRows
 }
+export async function buscarClientesPorNome(nome) {
+    const comando = `
+        SELECT  id_cliente AS id, 
+                nm_cliente AS nome 
+                FROM tb_clientes 
+        WHERE nm_cliente LIKE ?`;
+
+        if (!nome) {
+            return []; 
+        }
+        
+    const resposta = await con.query(comando, [`${nome}%`]); 
+    return resposta[0];
+}
