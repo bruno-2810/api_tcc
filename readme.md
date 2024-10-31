@@ -1,5 +1,5 @@
-create database tcc;
-use tcc;
+create database tcc_techprocess;
+use tcc_techprocess;
 create table tb_clientes (
 id_cliente int auto_increment primary key,
 id_usuario int,
