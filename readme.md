@@ -1,5 +1,5 @@
-create database tcc_techprocess;
-use tcc_techprocess;
+create database bd_techprocess;
+use bd_techprocess;
 create table tb_clientes (
 id_cliente int auto_increment primary key,
 id_usuario int,
@@ -30,6 +30,7 @@ id_usuario int primary key auto_increment,
 ds_email varchar(100),
 ds_senha varchar(100)
 );
+
 insert into tb_usuarios (ds_email, ds_senha)
 value ("brunin", "1234");
 
@@ -46,4 +47,4 @@ PORTA=5100
 MYSQL_HOST=192.168.0.25
 MYSQL_USER=infobmaster
 MYSQL_PWD=Aluno2024!
-MYSQL_DB=mblvidros
+MYSQL_DB=bd_techprocess
