@@ -1,5 +1,12 @@
 create database bd_techprocess;
 use bd_techprocess;
+
+create table tb_usuarios(
+id_usuario int primary key auto_increment,
+ds_email varchar(100),
+ds_senha varchar(100)
+);
+
 create table tb_clientes (
 id_cliente int auto_increment primary key,
 id_usuario int,
@@ -25,14 +32,10 @@ vl_valor decimal (10,2),
 	foreign key (id_usuario) references tb_usuarios(id_usuario)
 );
 
-create table tb_usuarios(
-id_usuario int primary key auto_increment,
-ds_email varchar(100),
-ds_senha varchar(100)
-);
 
 insert into tb_usuarios (ds_email, ds_senha)
-value ("brunin", "1234");
+value ("brunin", "1234"),
+	  ("braga", "4321");
 
 PORTA=5100
 
