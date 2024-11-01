@@ -51,3 +51,9 @@ MYSQL_HOST=192.168.0.25
 MYSQL_USER=infobmaster
 MYSQL_PWD=Aluno2024!
 MYSQL_DB=bd_techprocess
+PORTA=5100
+
+MYSQL_HOST=192.168.0.25
+MYSQL_USER=admin
+MYSQL_PWD=@dm!n
+MYSQL_DB=bd_techprocess
