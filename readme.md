@@ -57,3 +57,11 @@ MYSQL_HOST=192.168.0.25
 MYSQL_USER=admin
 MYSQL_PWD=@dm!n
 MYSQL_DB=bd_techprocess
+
+
+PORTA=5016
+
+MYSQL_HOST=localhost
+MYSQL_USER=admin
+MYSQL_PWD=@dm!n
+MYSQL_DB=bd_techprocess
