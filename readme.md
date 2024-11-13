@@ -35,7 +35,10 @@ vl_valor decimal (10,2),
 
 insert into tb_usuarios (ds_email, ds_senha)
 value ("brunin", "1234"),
-	  ("braga", "4321");
+	  ("braga", "4321"),
+	  ("Ryan", "7777"),
+	  ("Miguel", "4567"),
+	  ("isabel", "8910");
 
 PORTA=5100
 
